@@ -1,7 +1,7 @@
 #transmissionMedium
 #range of probability of corruption of single bit
-configMinimumProbability = 0.01
-configMaximumProbability = 0.02
+configMinimumProbability = 0.001
+configMaximumProbability = 0.002
 
 #sender
 configDataType = 2
@@ -11,11 +11,11 @@ configDataSize = 10000
 configFileName = "data.txt"
 
 #packeter
-configPacketSize = 700
+configPacketSize = 30
 
 #encoder
-configEncodingType = 2
-configReedSolomonRedundantBytes = 100
+configEncodingType = 1
+configReedSolomonRedundantBytes = 3
 #BCH
 configBCHPolynomial = 8219
 configBCHBits = 200

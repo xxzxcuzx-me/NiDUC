@@ -37,14 +37,20 @@ class Sender:
             self.data = file.read()
             file.close()
 
-        dataInPackets = packeter.pack(self.data)
+        self.dataInPackets = packeter.pack(self.data)
         dataInPacketsAfterEncoding = []
 
-        for packet in dataInPackets:
+        for packet in self.dataInPackets:
             dataInPacketsAfterEncoding.append(encoder.encodePacket(packet))
 
         dataAfterTransmission = []
         for packet in dataInPacketsAfterEncoding:
             dataAfterTransmission.append(medium.transmitPacket(packet))
 
+        self.corruptedPacketsCount = 0
+        for i in range(len(dataInPacketsAfterEncoding)):
+            if dataInPacketsAfterEncoding[i] != dataAfterTransmission[i]:
+                self.corruptedPacketsCount += 1
+        self.correctPacketsCount = len(dataInPacketsAfterEncoding) - self.corruptedPacketsCount
+        
         return dataAfterTransmission
